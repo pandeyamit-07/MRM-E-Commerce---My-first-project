@@ -1,0 +1,427 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>LocalStorage</title>
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,400,0,-25" />
+</head>
+<style>
+    * {
+        margin: 0px;
+        box-sizing: border-box;
+        font-family: 'Nunito', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+    .material-symbols-outlined {
+        font-weight: 900;
+        font-size: 1.7rem;
+        transform: translateY(20%);
+    }
+
+    .discount {
+        color: green;
+    }
+
+    .products {
+        padding: 20px 100px;
+    }
+
+    @media (max-width : 600px) {
+        .product {
+            grid-template-columns: 100% !important;
+            padding: 10px !important;
+        }
+
+        .products {
+            padding: 20px 20px;
+        }
+
+        .image {
+            width: 60% !important;
+            display: block;
+            margin: auto;
+        }
+
+        .image-cnt {
+            padding: 0px !important;
+            box-shadow: none !important;
+        }
+
+        .desc-title {
+            display: none;
+        }
+
+        .description {
+            display: none;
+        }
+
+        .right {
+            width: 100% !important;
+            padding-left: 0px !important;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 4px 0px !important;
+            margin: 5px 0px !important;
+            border: none;
+            background-color: rgb(242, 225, 77);
+            font-size: 1.2rem;
+            width: 100% !important;
+            transform: translateX(0%) !important;
+        }
+
+        .product-name {
+            font-size: 1.2rem !important;
+            padding: 10px 0px !important;
+        }
+
+        .price .price-title {
+            font-size: 1rem !important;
+        }
+
+        .price .mrp {
+            color: rgb(122, 125, 122);
+            font-weight: 500;
+            font-size: 1rem !important;
+        }
+
+        .price .cur-price {
+            color: rgb(8, 145, 8);
+            font-size: 1.1rem !important;
+            padding-left: 5px;
+        }
+
+        .quantity {
+            font-size: 0.7rem;
+        }
+
+    }
+
+    .product {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 20% 80%;
+        padding: 20px;
+        margin: 20px 0px;
+        box-shadow: 0px 0px 2px 3px rgb(231, 231, 231);
+    }
+
+    .image {
+        width: 100%;
+    }
+
+    .image-cnt {
+        width: 100%;
+        padding: 30px 0px;
+        box-shadow: 0px 0px 2px 1px rgb(231, 231, 231);
+    }
+
+    .right {
+        width: 100%;
+        text-align: left;
+        padding-left: 70px;
+        font-size: 20px;
+    }
+
+    .product-name {
+        font-size: 2rem;
+        padding: 10px 0px;
+    }
+
+    .description {
+        font-size: 1.2rem;
+        padding: 10px 60px;
+    }
+
+
+
+    .btn {
+        display: inline-block;
+        padding: 7px 0px;
+        margin: 20px 0px;
+        border: none;
+        background-color: rgb(242, 225, 77);
+        font-size: 1.2rem;
+        width: 40%;
+        border-radius: 2rem;
+        transform: translate(60%, 65%);
+    }
+
+    .btn:active {
+        background-color: rgb(16, 169, 16);
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    .price .price-title {
+        font-size: 1.2rem;
+    }
+
+    .price .mrp {
+        color: rgb(122, 125, 122);
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+
+    .price .cur-price {
+        color: rgb(8, 145, 8);
+        font-weight: 600;
+        font-size: 1.3rem;
+        padding-left: 5px;
+    }
+
+    * {
+        font-family: 'Nunito', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        margin: 0%;
+    }
+
+    /* navbar  */
+    nav {
+        position: fixed;
+        width: 100%;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        background-color: rgb(216, 214, 210);
+    }
+
+    .hamburger {
+        color: rgb(0, 0, 0);
+        flex: 1;
+        display: none;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .logo {
+        font-size: 2rem;
+        padding-left: 50px;
+        flex: 2;
+        color: white;
+    }
+
+    .logo img {
+        width: 50%;
+    }
+
+    .search {
+        display: flex;
+        flex: 4;
+    }
+
+    .search input {
+        width: 80%;
+        height: 30px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border: none;
+        height: 40px;
+    }
+    input:hover {
+        border-bottom: 2px solid rgb(242, 192, 27) !important;
+      }
+
+    .search button {
+        background-color: rgb(97, 96, 96);
+        width: 20%;
+        height: 40px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        border: none;
+        font-weight: bold;
+        /* border: 2px double rgb(155, 70, 70); */
+    }
+
+    #hidden {
+        text-align: right;
+        padding: 20px 0px;
+        font-size: 1.2rem;
+        color: transparent;
+    }
+
+    .links {
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 0px 20px;
+        flex: 6;
+    }
+
+    .links a {
+        text-decoration: none;
+        color: rgb(0, 0, 0);
+        font-size: 1.4rem;
+        font-weight: 900;
+        cursor: pointer;
+    }
+
+    .cart-logo {
+        text-align: center;
+        position: relative;
+        color: white;
+        flex: 1;
+    }
+
+    .cart-logo span {
+        display: block;
+        text-align: center;
+        color: black;
+        cursor: pointer;
+    }
+
+    .cart-logo #count {
+        position: absolute;
+        top: -30%;
+        right: 26%;
+        background-color: rgb(235, 18, 18);
+        border-radius: 50%;
+        font-size: 16px;
+        width: 20px;
+        height: 20px;
+        color: white;
+    }
+
+    .products .product:first-child {
+        margin-top:80px;
+    }
+
+    @media (max-width: 600px) {
+
+        /* navbar  */
+        nav {
+            padding: 10px 0px;
+        }
+
+        .links {
+            flex: 7;
+            display: none;
+            width: 200px;
+        }
+
+        #hidden {
+            color: black;
+            cursor: pointer;
+        }
+
+        .links a {
+            display: block;
+            text-align: center;
+            padding: 10px 0px;
+        }
+
+        .show {
+            position: fixed;
+            display: block;
+            background-color: rgb(179, 183, 185);
+            top: 0%;
+            left: 0%;
+            height: 100vh;
+            z-index: 100;
+        }
+
+        .hidden {
+            top: 0%;
+            left: -100%;
+        }
+
+        nav {
+            grid-template-columns: 10% 20% 60% 0% 10% !important;
+        }
+
+        .hamburger {
+            display: block;
+        }
+
+        .logo {
+            font-size: 1.6rem !important;
+            padding-left: 20px !important;
+        }
+
+        .search {
+            flex: 4;
+        }
+
+        .search input {
+            width: 70%;
+            height: 30px !important;
+        }
+
+        .search button {
+            width: 30%;
+            height: 30px !important;
+        }
+
+        .cart-logo {
+            width: 15%;
+            flex: 2;
+        }
+    }
+</style>
+</head>
+
+<body>
+    <nav id="home">
+        <span id="show" style="border: none;font-size:2rem ;" onclick="toggle(1);"
+            class="material-symbols-outlined hamburger">
+            menu
+        </span>
+        <div class="logo">
+            <img src="./pogo.png" alt="">
+        </div>
+        <form class="search">
+            <input type="search">
+            <button>Search</button>
+        </form>
+        <div class="links">
+            <div id="hidden" onclick="toggle(0);">X</div>
+            <a href="./menubar.html">Home</a>
+            <a href="./index.html">Products</a>
+            <a href="./menubar.html#About">About</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="cart-logo">
+            <a href="./cart.html" class="material-symbols-outlined" style="border: none;font-size:2rem ;text-decoration: none;">
+                shopping_cart_checkout
+            </a>
+            <span id="count">0</span>
+
+        </div>
+    </nav>
+    <div class="products">
+
+    </div>
+
+    <script src="./Main.js"></script>
+     <!--navbar js-->
+     <script>
+        function openNav() {
+          document.getElementById("myNav").style.display = "block";
+        }
+    
+        function closeNav() {
+          document.getElementById("myNav").style.display = "none";
+        }
+    
+        function toggle(val) {
+          let links = document.getElementsByClassName("links")[0];
+    
+          if (val == 1) {
+            links.classList.add("show");
+            links.classList.remove("hidden")
+          } else {
+            links.classList.add("hidden");
+            links.classList.remove("show")
+          }
+        }
+      </script>
+</body>
+
+</html>

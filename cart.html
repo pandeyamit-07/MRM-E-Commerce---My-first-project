@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@40,500,0,200" />
+
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+      font-family: 'Nunito';
+    }
+
+    /*navbar*/
+    nav {
+      display: flex;
+      align-items: center;
+      background-color: rgb(216, 214, 210);
+    }
+
+    .hamburger {
+      color: rgb(0, 0, 0);
+      flex: 1;
+      display: none;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .logo {
+      font-size: 2rem;
+      padding-left: 50px;
+      flex: 2;
+      color: white;
+    }
+
+    .logo img {
+      width: 50%;
+    }
+
+    .search {
+      display: flex;
+      flex: 4;
+    }
+
+    .search input {
+      width: 80%;
+      height: 30px;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border: none;
+      height: 40px;
+    }
+
+    input:hover {
+      border-bottom: 2px solid rgb(242, 192, 27) !important;
+    }
+
+    .search button {
+      background-color: rgb(222, 220, 220);
+      width: 20%;
+      height: 40px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border: none;
+      font-weight: bold;
+      /* border: 2px double rgb(155, 70, 70); */
+    }
+
+    #hidden {
+      text-align: right;
+      padding: 20px 0px;
+      font-size: 1.2rem;
+      color: transparent;
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 0px 20px;
+      flex: 6;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: rgb(0, 0, 0);
+      font-size: 1.4rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .cart-logo {
+      text-align: center;
+      position: relative;
+      color: white;
+      flex: 1;
+    }
+
+    .cart-logo span {
+      display: block;
+      text-align: center;
+      color: black;
+      cursor: pointer;
+    }
+
+    .cart-logo #count {
+      position: absolute;
+      top: -27% !important;
+      right: 23% !important;
+      background-color: rgb(235, 18, 18);
+      border-radius: 50%;
+      font-size: 10px !important;
+      width: 15px;
+      height: 15px;
+      color: white;
+    }
+
+    a {
+      text-decoration: none;
+      color: white;
+    }
+
+    /*navbar end*/
+
+    .items {
+      max-width: 1200px;
+      padding: 0px 20px 20px 20px;
+      margin: 10px auto 0px;
+      box-shadow: 0px 0px 6px 2px rgb(223, 222, 222);
+      border-radius: 20px;
+    }
+
+    .items hr:first-of-type {
+      display: none;
+    }
+
+    .product {
+      display: flex;
+      position: relative;
+      padding-top: 10px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .image {
+      width: 15%;
+    }
+
+    .detail {
+      width: 45%;
+      padding: 10px 0px 0px 10px;
+    }
+
+    .detail .name {
+      font-size: 1.8rem;
+    }
+
+    .detail .quantity {
+      font-size: 1.4rem;
+    }
+
+    .detail .fragrance {
+      font-size: 1.4rem;
+    }
+
+    .count-option {
+      width: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      -webkit-user-select: none;
+      /* Safari */
+      -ms-user-select: none;
+      /* IE 10 and IE 11 */
+      user-select: none;
+      /* Standard syntax */
+    }
+
+    .count-option span {
+      padding: 0px 10px;
+      font-weight: 600;
+      font-size: 1.4rem;
+    }
+
+    .count-option .btn {
+      border: 1px solid grey;
+      border-radius: 5px;
+      padding: 5px 10px;
+    }
+
+    .remove {
+      width: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font: 800;
+      font-size: 1.4rem;
+    }
+
+    .remove-from-cart {
+      position: absolute;
+      top: 4%;
+      right: 0%;
+      font-size: 1.6rem;
+      cursor: pointer;
+    }
+
+    .subtotal {
+      max-width: 1200px;
+      display: flex;
+      padding: 10px 20px;
+      margin: 20px auto 0px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 6px 2px rgb(223, 222, 222);
+      font-size: 1.4rem;
+      align-items: center;
+    }
+
+    .subtotal .total {
+      width: 70%;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    .subtotal .proceed {
+      width: 20%;
+      text-align: center;
+      border-radius: 7px;
+      text-decoration: none;
+      background-color: rgb(220, 220, 26);
+      color: black;
+      padding: 5px 0px;
+      font-weight: 700;
+    }
+
+    @media(max-width:900px) {
+
+      /* navbar  */
+      nav {
+        padding: 4px 0px;
+      }
+
+      .links {
+        flex: 7;
+        display: none;
+        width: 200px;
+      }
+
+      #hidden {
+        color: black;
+        cursor: pointer;
+      }
+
+      .links a {
+        display: block;
+        text-align: center;
+        padding: 10px 0px;
+      }
+
+      .show {
+        position: fixed;
+        display: block;
+        background-color: rgb(179, 183, 185);
+        top: 0%;
+        left: 0%;
+        height: 100vh;
+        z-index: 100;
+      }
+
+      .hidden {
+        top: 0%;
+        left: -100%;
+      }
+
+      nav {
+        grid-template-columns: 10% 20% 60% 0% 10% !important;
+      }
+
+      .hamburger {
+        display: block;
+        font-size: 1.5rem !important;
+      }
+
+      .logo {
+        font-size: 1.6rem !important;
+        padding-left: 10px !important;
+      }
+
+      .logo img {
+        width: 100% !important;
+      }
+
+      .search {
+        flex: 4;
+      }
+
+      .search input {
+        width: 70%;
+        height: 30px !important;
+      }
+
+      .search button {
+        width: 30%;
+        height: 30px !important;
+      }
+
+      .cart-logo {
+        width: 15%;
+        flex: 2;
+      }
+
+      .cart-logo span {
+        font-size: 1.5rem !important;
+      }
+
+      .product:not(.product:last-of-type) {
+        padding: 10px !important;
+      }
+
+      .product {
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* IE 10 and IE 11 */
+        user-select: none;
+        /* Standard syntax */
+      }
+
+      .detail .name {
+        font-size: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-weight: 600 !important;
+        padding: 0px 3px 0px 0px !important;
+      }
+
+      .detail .quantity {
+        font-size: .8rem;
+        color: rgb(101, 101, 101);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .detail .fragrance {
+        font-size: .8rem;
+        color: rgb(101, 101, 101);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .count-option {
+        width: 25%;
+      }
+
+      .count-option span {
+        padding: 0px;
+        font-size: 1rem;
+      }
+
+      .btn {
+        padding: 2px 5px !important;
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        /* position: relative;
+      right: -40%;
+      top: -10%; */
+      }
+
+      .remove {
+        width: 15%;
+        align-items: flex-end;
+      }
+
+      .remove .price {
+        font-size: 0.8rem;
+      }
+
+      .remove-from-cart {
+        font-size: 1rem;
+      }
+
+      .image {
+        display: flex;
+        align-items: center;
+      }
+
+      .total, .proceed {
+        font-size: 1rem !important;
+        white-space: nowrap;
+      }
+
+      .proceed {
+        width: 40% !important;
+      }
+
+      .subtotal {
+        position: sticky;
+        bottom: 0%;
+        background-color: white;
+        left: 0%;
+      }
+      /*navbar end*/
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="home">
+    <span id="show" style="border: none;font-size:2rem ;" onclick="toggle(1);"
+      class="material-symbols-outlined hamburger">
+      menu
+    </span>
+    <div class="logo">
+      <img src="./pogo.png" alt="">
+    </div>
+    <form class="search">
+      <input type="search">
+      <button>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search"
+          viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+        </svg>
+      </button>
+    </form>
+    <div class="links">
+      <div id="hidden" onclick="toggle(0);">X</div>
+      <a href="./menubar.html">Home</a>
+      <a href="./index.html">Products</a>
+      <a href="#About">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="cart-logo">
+      <span class="material-symbols-outlined" style="border: none;font-size:2rem ;">
+        shopping_cart_checkout
+      </span>
+      <span id="count">1</span>
+
+    </div>
+  </nav>
+
+
+
+
+  <div class="items">
+    <!-- <hr>
+        <div class="product">
+            <div class="image">
+                <img src="./1.png" alt="">
+            </div>
+            <div class="detail">
+                <div class="name">${item.title}</div>
+                <div class="fragrance">Fragrance : ${item.fragrance}</div>
+                <div class="quantity">Quantity : ${item.quantity}</div>
+            </div>
+            <div class="count-option">
+                <div class="btn">
+                    <span onclick="decrement(${item.id})">-</span>
+                    <span id="${item.id}">${item.count}</span>
+                    <span onclick="increment(${item.id})">+</span>
+                </div>
+            </div>
+            <div class="remove-from-cart" onclick="remove(${item.id})">&#10006;</div>
+            <div class="remove">
+                <div class="price">₹ ${item.current_price}</div>
+            </div>
+        </div> -->
+
+  </div>
+  <div class="subtotal">
+    <div class="total">Subtotal : ₹ 0</div>
+    <a href="./order.html" class="proceed">Place Order</a>
+  </div>
+  <script src="./cart.js"></script>
+  <script>
+    /*menubar*/
+    function openNav() {
+      document.getElementById("myNav").style.display = "block";
+    }
+
+    function closeNav() {
+      document.getElementById("myNav").style.display = "none";
+    }
+
+    function toggle(val) {
+      let links = document.getElementsByClassName("links")[0];
+
+      if (val == 1) {
+        links.classList.add("show");
+        links.classList.remove("hidden")
+      } else {
+        links.classList.add("hidden");
+        links.classList.remove("show")
+      }
+    }
+
+    window.addEventListener('load', () => {
+      let count = JSON.parse(localStorage.getItem("count")).count;
+      let countElem = document.getElementById("count");
+      countElem.innerHTML = count;
+    })
+  </script>
+</body>
+
+</html>

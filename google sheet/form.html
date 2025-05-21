@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="https://script.google.com/macros/s/AKfycbzRojAPS_CB7QwLAc2s3FHyvBt6p7eufQ0qHh83JK4DMHFxQI7sefiJIcCvfRQVRiyF/exec">
+        <input name="Email" type="email" placeholder="Email" required>
+        <input name="Name" type="text" placeholder="Name" required>
+        <button type="submit">Send</button>
+      </form>
+
+
+<script>
+    const sheetName = 'Sheet1'
+const scriptProp = PropertiesService.getScriptProperties()
+
+function intialSetup () {
+  const activeSpreadsheet = SpreadsheetApp.getActiveSpreadsheet()
+  scriptProp.setProperty('key', activeSpreadsheet.getId())
+}
+
+function doPost (e) {
+  const lock = LockService.getScriptLock()
+  lock.tryLock(10000)
+
+  try {
+    const doc = SpreadsheetApp.openById(scriptProp.getProperty('key'))
+    const sheet = doc.getSheetByName(sheetName)
+
+    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
+    const nextRow = sheet.getLastRow() + 1
+
+    const newRow = headers.map(function(header) {
+      return header === 'Date' ? new Date() : e.parameter[header]
+    })
+
+    sheet.getRange(nextRow, 1, 1, newRow.length).setValues([newRow])
+
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'success', 'row': nextRow }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  catch (e) {
+    return ContentService
+      .createTextOutput(JSON.stringify({ 'result': 'error', 'error': e }))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
+
+  finally {
+    lock.releaseLock()
+  }
+}
+</script>
+</body>
+</html>

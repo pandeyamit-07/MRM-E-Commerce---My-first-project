@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="order.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<body>
+    <div class="container">
+        <div class="title">
+            <h2>Product Order Form</h2>
+        </div>
+      <div class="d-flex">
+        <form id="myform" action="" method="">
+          <label>
+            <span class="fname">First Name <span class="required">*</span></span>
+            <input type="text" name="fname">
+          </label>
+          <label>
+            <span class="lname">Last Name <span class="required">*</span></span>
+            <input type="text" name="lname">
+          </label>
+          <label>
+            <span>Company Name (Optional)</span>
+            <input type="text" name="cn">
+          </label>
+        
+          <label>
+            <span>Street Address <span class="required">*</span></span>
+            <input type="text" name="houseadd" placeholder="House number and street name" required>
+          </label>
+          <label>
+            <span>&nbsp;</span>
+            <input type="text" name="apartment" placeholder="Apartment, suite, unit etc. (optional)">
+          </label>
+          <label>
+            <span>City <span class="required">*</span></span>
+            <input type="text" name="city"> 
+          </label>
+          <label>
+            <span>State<span class="required">*</span></span>
+            <input type="text" name="state"> 
+          </label>
+          <label>
+            <span>Pincode / postcode<span class="required">*</span></span>
+            <input type="text" name="pin"> 
+          </label>
+          <label>
+            <span>Phone <span class="required">*</span></span>
+            <input type="tel" name="phone"> 
+          </label>
+          <label>
+            <span>Email Address</span>
+            <input type="email" name="email"> 
+          </label>
+          <div style="display: flex; justify-content: center;">
+          <table id="bill">
+            <caption style="padding: 5px 0px;font-weight: 900; margin:10px;background-color: rgb(177, 181, 184);">Order Detail</caption>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+            <tr>
+              <td>Soap</td>
+              <td>2</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Soap</td>
+              <td>2</td>
+              <td>50</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td colspan="2" >100</td>
+            </tr>
+          </table>
+        </div>
+          <div style="text-align: center;margin: 40px 0px;">
+            <input style="padding: 8px 120px;border: none; border-radius: 50px;  background: linear-gradient( rgb(208, 208, 8) , rgb(171, 171, 5) );" type="submit">
+          </div>
+        </form>
+        
+       </div>
+      </div>  
+
+      <div id="show-confirm">
+        <span class="material-symbols-outlined">
+          check_circle
+          </span>
+      </div>
+      <script>
+
+        window.onload = () => {
+          let cart  = JSON.parse(localStorage.getItem("cart"));
+          let one = `
+                    <caption style="padding: 5px 0px;font-weight: 900; margin:10px;background-color: rgb(177, 181, 184);">Order Detail</caption>
+                    <tr>
+                      <th>Product Name</th>
+                      <th>Quantity</th>
+                      <th>Count</th>
+                      <th>Price</th>
+                    </tr>
+                    `;
+          let two = "";
+          let total = 0;
+          cart.forEach((product) => {
+            two += `
+                    <tr>
+                      <td>${product.title}</td>
+                      <td>${product.quantity}</td>
+                      <td>${product.count}</td>
+                      <td>${product.current_price * product.count}</td>
+                    </tr>
+                   `;
+            total += product.current_price * product.count;
+          });
+          let three = `
+                        <tr>
+                          <td>Total</td>
+                          <td colspan="2" >${total}</td>
+                        </tr>
+                      `;
+          let finalBill = one + two + three;
+          document.getElementById('bill').innerHTML = finalBill;
+        }
+
+        let myform = document.getElementById('myform');
+        myform.addEventListener('submit' , (event) => {
+
+            event.preventDefault();
+            let url = 'https://script.google.com/macros/s/AKfycbyPnQnQUqnhwrpBi2x9_7FEJHaYxby1CsM7pHpJ48bIRqZgF5sb1JJ9_aPtEFDt7tI9/exec';
+            let formData = new FormData(myform);
+            // formData.append('username', event.target[0].value);
+            // formData.append('password', event.target[1].value);
+
+            // fetch( url ,
+            //     {
+            //         mode: 'no-cors',
+            //         method : 'POST' ,
+            //         body : formData
+            //     }
+            // ).then((res) => res.text())
+            // .then((result) => {
+            //   let show = document.getElementById('show-confirm')
+            //   show.style.visibility='visible';
+            //   setTimeout(() => { 
+            //     show.style.visibility='hidden' ;
+            //     window.location.href = "./index.html";
+            //   } ,3000);
+            // });
+
+            localStorage.setItem("cart", JSON.stringify([]));
+            localStorage.setItem("count", JSON.stringify({count:0}));
+        });
+    </script>  
+</body>
+</html>

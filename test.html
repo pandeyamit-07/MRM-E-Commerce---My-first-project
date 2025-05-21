@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </style>
+
+    <style>
+        body {
+            background-color: rgb(240, 242, 244);
+        }
+
+        * {
+            margin: 0px;
+            box-sizing: border-box;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            background-color: rgb(216, 214, 210);
+        }
+
+        .hamburger {
+            color: rgb(0, 0, 0);
+            flex: 1;
+            display: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .logo {
+            font-size: 2rem;
+            padding-left: 50px;
+            flex: 2;
+            color: white;
+        }
+
+        .logo img {
+            width: 50%;
+        }
+
+        .search {
+            display: flex;
+            flex: 4;
+        }
+
+        .search input {
+            width: 80%;
+            height: 30px;
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            border: none;
+            height: 40px;
+        }
+
+        .search button {
+            background-color: rgb(97, 96, 96);
+            width: 20%;
+            height: 40px;
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+            border: none;
+            font-weight: bold;
+            /* border: 2px double rgb(155, 70, 70); */
+        }
+
+        #hidden {
+            text-align: right;
+            padding: 20px 0px;
+            font-size: 1.2rem;
+            color: transparent;
+        }
+
+        .links {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            padding: 0px 20px;
+            flex: 6;
+        }
+
+        .links a {
+            text-decoration: none;
+            color: rgb(0, 0, 0);
+            font-size: 1.4rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .cart {
+            text-align: center;
+            position: relative;
+            color: white;
+            flex: 1;
+        }
+
+        .cart span {
+            display: block;
+            text-align: center;
+            color: black;
+            cursor: pointer;
+        }
+
+        .cart #count {
+            position: absolute;
+            top: -30%;
+            right: 26%;
+            background-color: rgb(235, 18, 18);
+            border-radius: 50%;
+            font-size: 16px;
+            width: 20px;
+            height: 20px;
+        }
+
+
+
+        @media (max-width:600px) {
+            nav {
+                padding: 10px 0px;
+            }
+
+            .links {
+                flex: 7;
+                display: none;
+                width: 200px;
+            }
+
+            #hidden {
+                color: black;
+                cursor: pointer;
+            }
+
+            .links a {
+                display: block;
+                text-align: center;
+                padding: 10px 0px;
+            }
+
+            .show {
+                position: absolute;
+                display: block;
+                background-color: rgb(179, 183, 185);
+                top: 0%;
+                left: 0%;
+                height: 100vh;
+            }
+
+            .hidden {
+                top: 0%;
+                left: -100%;
+            }
+
+            nav {
+                grid-template-columns: 10% 20% 60% 0% 10% !important;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.6rem !important;
+                padding-left: 20px !important;
+            }
+
+            .search {
+                flex: 4;
+            }
+
+            .search input {
+                width: 70%;
+                height: 30px !important;
+            }
+
+            .search button {
+                width: 30%;
+                height: 30px !important;
+            }
+
+            .cart {
+                width: 15%;
+                flex: 2;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <span id="show" onclick="toggle(1);" class="material-symbols-outlined hamburger">
+            menu
+        </span>
+        <div class="logo">
+            <img src="./pogo.png" alt="">
+        </div>
+        <form class="search">
+            <input type="search">
+            <button>Search</button>
+        </form>
+        <div class="links">
+            <div id="hidden" onclick="toggle(0);">X</div>
+            <a href="">Home</a>
+            <a href="">Products</a>
+            <a href="">About</a>
+            <a href="">Contact</a>
+        </div>
+        <div class="cart">
+            <span class="material-symbols-outlined">
+                shopping_cart_checkout
+            </span>
+            <span id="count">1</span>
+
+        </div>
+    </nav>
+
+    <script>
+        function toggle(val) {
+            let links = document.getElementsByClassName("links")[0];
+
+            if (val == 1) {
+                links.classList.add("show");
+                links.classList.remove("hidden")
+            } else {
+                links.classList.add("hidden");
+                links.classList.remove("show")
+            }
+        }
+    </script>
+</body>
+
+</html>

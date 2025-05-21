@@ -1,0 +1,47 @@
+<!DOCTYPE html
+<html langen">
+<>
+    <meta charsetUTF-8">    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        quantity:<span id="q">1</span><br>
+        <button type="button" id="minus-button">-</button>
+        <button type="button" id="number">1</button>
+        <button type="button" id="plus-button">+</button>
+        q:<span id="result"></span>
+    </div>
+    <script>
+        const numberButton = document.getElementById("number");
+        const minusButton = document.getElementById("minus-button");
+        let count = parseInt(localStorage.getItem("quantity")) || 1; // set default value to 1
+        numberButton.value = count;
+
+        minusButton.addEventListener('click', () => {
+            if (count <= 1) {
+                console.log("Quantity must be greater than 0");
+                alert("Quantity must be greater than 0");
+                return;
+            }
+            count--;
+            numberButton.textContent = count;
+            console.log(count);
+            document.getElementById("q").textContent = count;
+            localStorage.setItem("quantity", count);
+
+        });
+
+        const plusButton = document.getElementById("plus-button");
+        plusButton.addEventListener('click', () => {
+            count++;
+            numberButton.textContent = count;
+            console.log(count);
+            document.getElementById("q").textContent = count;
+            localStorage.setItem("quantity", count);
+        });
+
+        document.getElementById("result").innerHTML= localStorage.getItem("quantity"),;
+    </script>
+</body>
+</html>
